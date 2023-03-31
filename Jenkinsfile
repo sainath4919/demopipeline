@@ -30,7 +30,7 @@ pipeline {
             
             steps{
                 script{
-                   sh 'sudo -s docker build -t tomacatapp .'
+                   sh 'docker build -t tomacatapp .'
                 }
             }
         
