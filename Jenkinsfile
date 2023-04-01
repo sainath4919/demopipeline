@@ -25,13 +25,31 @@ pipeline {
                 sh 'mvn test'
             }
         }
+        stage('Static code Analysis'){
+            
+            steps{
+                script{
+                   withSonarQubeEnv(credentialsId: 'Sonarjenkin_desc') {
+                        sh "mvn clean package sonar:sonar"
+                    }
+                }
+            }
+        }
+        stage('Quality Gate'){
+            
+            steps{
+                script{
+                   waitForQualityGate abortPipeline: false, credentialsId: 'Sonarjenkin_desc'
+                }
+            }
+        }
         
         stage('Docker Image Build'){
             
             steps{
                 script{
                    sh 'sudo docker build -t tomacatapp .'
-                    sh 'sudo docker run -itd -p 8081:8080 --name samplewar2 tomacatapp'
+                    sh 'sudo docker run -itd -p 8081:8080 --name samplewar3 tomacatapp'
                 }
             }
         
