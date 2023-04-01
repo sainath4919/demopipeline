@@ -36,5 +36,13 @@ pipeline {
             }
         
     }
+         stage('Docker Push') {
+    	agent any
+      steps {
+      	withCredentials([usernamePassword(credentialsId: 'Dockerhub_cred', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+        	sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+          sh 'docker push sainath4919/tomacatapp:latest'
+        }
+      }
 }
 }
