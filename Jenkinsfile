@@ -41,7 +41,8 @@ pipeline {
       steps {
       	withCredentials([usernamePassword(credentialsId: 'Dockerhub_cred', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
         	sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-          sh 'docker push sainath4919/tomacatapp:latest'
+            sh 'sudo docker tag tomacatapp sainath4919/samplewar'
+          sh 'sudo docker push sainath4919/samplewar'
         }
       }
 }
