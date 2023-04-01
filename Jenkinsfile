@@ -31,7 +31,7 @@ pipeline {
             steps{
                 script{
                    sh 'sudo docker build -t tomacatapp .'
-                    sh 'sudo docker run -itd -p 8081:8080 --name samplewar tomacatapp'
+                    sh 'sudo docker run -itd -p 8081:8080 --name samplewar1 tomacatapp'
                 }
             }
         
